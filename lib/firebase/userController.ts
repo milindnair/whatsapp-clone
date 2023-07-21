@@ -1,5 +1,5 @@
 import {User} from "firebase/auth";
-import {getFirestore, doc, setDoc, serverTimestamp, collection, DocumentData} from "firebase/firestore";
+import {getFirestore, doc, setDoc, serverTimestamp, collection, DocumentData, getDoc} from "firebase/firestore";
 import { firestoreApp } from ".";
 
 export const firestore = getFirestore(firestoreApp);
@@ -24,3 +24,11 @@ export const getSnapshotDoc = (doc :DocumentData) =>{
         ...doc.data(),
     };
 } 
+
+export const getSingleUserFromFirestore = async (userId: string) => {
+    if (!userId) return;
+    const userRef = doc(firestore, `users/${userId}`);
+    const userSnap = await getDoc(userRef);
+    const user = userSnap.data();
+    return user;
+  };

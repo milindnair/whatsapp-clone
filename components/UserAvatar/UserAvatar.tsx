@@ -8,13 +8,15 @@ interface UserAvatarProps {
 
 const UserAvatar: React.FC<UserAvatarProps> = ({ image, alt }) => {
   return (
-    <Image
-      src={image}
-      alt={alt}
-      width={50}
-      height={50}
-      className="rounded-full cursor-pointer hover:opacity-70"
-    />
+    <div style={{height:"50px",width:"50px",overflow:"hidden",borderRadius:"50%"}}>
+      <Image
+        src={image}
+        alt={alt}
+        width={50}
+        height={50}
+        className="bg-[black] object-cover cursor-pointer hover:opacity-80"
+      />
+    </div>
   );
 };
 

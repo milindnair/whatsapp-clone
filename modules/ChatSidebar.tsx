@@ -3,6 +3,8 @@ import Search from "@/components/Sidebar/Search";
 import Archived from "@/components/Sidebar/Archived";
 import { AllUsersType,AllUsers } from "@/types";
 import Chat from "@/components/Sidebar/Chat";
+import { Firestore } from "firebase/firestore";
+import FirestoreChat from "@/components/Sidebar/FirestoreChat";
 type Props = {
   data: AllUsers;
 };
@@ -14,6 +16,7 @@ const ChatSidebar: React.FC<Props> = ({ data }) => {
       <SidebarHeader />
       <Search />
       <Archived />
+      <FirestoreChat />
       {!!users && users.map((user:AllUsersType) => (
        <Chat key={user.id} data={user} />
       ))}

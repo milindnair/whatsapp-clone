@@ -8,7 +8,6 @@ import MainScreen from "@/modules/MainScreen";
 
 export default async function () {
   const fetchedUsers = await getUser();
-  console.log(fetchedUsers);
   return (
     <main className="flex h-screen overflow-hidden">
       <div className="bg-white w-1/3 overflow-y-auto text-black">

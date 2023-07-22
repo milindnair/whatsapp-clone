@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { firestore } from "@/lib/firebase/userController";
 import Messages from "./Messages";
+import Images from "./Images";
 
 
 const MessageBody: React.FC = () => {
@@ -37,6 +38,7 @@ const MessageBody: React.FC = () => {
   return (
     <div className={`overflow-y-auto flex flex-col min-h-screen justify-end bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]`}>
       <Messages data={dataList} paramId={params?.id || ""}  />
+      <Images  />
       <div ref={lastMessageRef}></div>
     </div>
   );

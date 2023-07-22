@@ -21,7 +21,7 @@ const ContactList: React.FC<ContactListProps> = ({ contacts, handleClose }) => {
             <UserAvatar image={contact?.photo} alt={contact?.name} />
             <div>
               <p>{contact?.name}</p>
-              <p>{formatDate(contact?.lastOnline.seconds)}</p>
+              <p>{formatDate(contact?.lastOnline?.seconds)}</p>
             </div>
           </div>
         ))}

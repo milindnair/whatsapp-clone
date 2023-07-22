@@ -18,6 +18,7 @@ import {
   export const createNewChat = async (messageText: string, routerId: string) => {
     const currentUser = auth?.currentUser;
     const recipientDetails = await getSingleUserFromFirestore(routerId);
+    console.log(recipientDetails);
     const chatRef = doc(firestore, "chats", routerId);
     await setDoc(
       chatRef,

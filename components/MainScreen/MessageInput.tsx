@@ -17,8 +17,11 @@ const MessageInput: React.FC = () => {
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (message === "") return;
-    createNewChat(message, params?.id);
-    setMessage("");
+    else {
+      await createNewChat(message, params?.id);
+      setMessage("");
+    }
+
   };
 
 
@@ -40,6 +43,7 @@ const MessageInput: React.FC = () => {
           type="text"
           placeholder="Type a message"
           onChange={(e) => setMessage(e.target.value)}
+          value={message}
         />
       </form>
       <IconButton>

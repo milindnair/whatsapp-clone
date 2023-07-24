@@ -3,16 +3,19 @@ import { auth, storage } from ".";
 import { StorageReference, getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import { ImagesType } from "@/types";
 
-export const uploadImage = async (file:File,paramsId:string) => {
-    const formatteddate = formatDate(new Date());
-    const fileName = `${paramsId}/${formatteddate}.jpg`;
-    const storageRef = ref(storage,fileName);
-    //upload to the storage bucket
-    await uploadBytes(storageRef,file).then((snapshot) => {
-        console.log("Uploaded a blob or file!",snapshot);
-    })
+export const uploadImage = async (file: File, paramsId: string) => {
+    const day = new Date();
+    const formattedDate = formatDate(day).replace(/\//g, "-");     
+    const fileName = `${paramsId}/${formattedDate}.jpg`;
+    console.log(fileName);
+    const storageRef = ref(storage, fileName);
+  
+    // Upload to the storage bucket
+    await uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!", snapshot);
+    });
     return fileName;
-}
+  };
 
 export const handleUpload = async (
     paramsId:string,
@@ -48,11 +51,12 @@ export const fetchImages = async (
            const imageURL = await  getStorageDownloadURL(itemRef);
            const imagesData = {
             photoURL: imageURL,
-            createdAt: itemRef.name.split(".")[0],
+            createdAt: itemRef.name,
             type: "storage",
             messageSenderId: auth?.currentUser?.uid,
           };
           imagesArray.push(imagesData);
+
           setImages(imagesArray);
         });
     });

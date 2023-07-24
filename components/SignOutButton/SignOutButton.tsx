@@ -22,7 +22,7 @@ const SignOutButton:React.FC<Props> = ({handleToggle,open}) => {
   
     return (
     <div className='flex flex-col relative'>
-        <IconButton onClick={handleToggle}>
+        <IconButton onClick={handleToggle} style={{color:"white"}}>
             <KeyboardArrowDownIcon/>
         </IconButton>
         {open ? (

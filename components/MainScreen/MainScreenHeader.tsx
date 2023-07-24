@@ -13,6 +13,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { handleContactInfo } from './helper';
 import { DocumentData } from 'firebase/firestore';
 import UserAvatar from '../UserAvatar/UserAvatar';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 
 const MainScreenHeader:React.FC = () => {
@@ -48,33 +49,37 @@ const MainScreenHeader:React.FC = () => {
 
 
   return (
-    <div className="sticky top-0 p-2 h-20 bg-gray-200 border-b border-gray-400 z-10 flex items-center justify-between">
-      <div>
+    <div className="sticky top-0 p-2 h-20 bg-[#075E54] border-b border-gray-400 z-10 flex items-center justify-between">
+      <div className='flex gap-3'>
+      <IconButton onClick={() => router.push("/")}>
+          <ArrowBackOutlinedIcon  className='back' style={{color:"white"}} />
+        </IconButton>
         {contactInfo ? (
-          <div className="flex items-center gap-2 overflow-hidden ">
+          <div className="flex items-center gap-2 overflow-hidden text-[#fff] ">
             <UserAvatar image={contactInfo?.photo} alt={contactInfo?.name} />
-            <strong>{contactInfo?.name}</strong>
-          </div>
+            <strong className='text-lg'>{contactInfo?.name}</strong>
+          </div> 
         ) : (
           <AccountCircleIcon />
         )}
+        
       </div>
       <ClickAwayListener onClickAway={handleClose}>
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-6 items-center text-white">
           <IconButton>
-            <VideocamOutlinedIcon />
+            <VideocamOutlinedIcon style={{color:"white"}} />
           </IconButton>
           <IconButton>
-            <LocalPhoneOutlinedIcon />
+            <LocalPhoneOutlinedIcon style={{color:"white"}}/>
           </IconButton>
           |
           <IconButton>
-            <SearchOutlinedIcon />
+            <SearchOutlinedIcon style={{color:"white"}}/>
           </IconButton>
           <IconButton
             onClick={() => deleteChatFromFirestore(params?.id, router)}
           >
-            <DeleteOutlineOutlinedIcon />
+            <DeleteOutlineOutlinedIcon style={{color:"white"}}/>
           </IconButton>
           <SignOutButton open={open} handleToggle={handleToggle} />
         </div>

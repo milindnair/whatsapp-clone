@@ -39,19 +39,22 @@ export function formatDate(arg1: unknown): string {
     const d = new Date(arg1 * 1000);
     const fullDate = d.toLocaleString();
     const dateOnly = fullDate.split(",")[0];
-    const timeOnly = fullDate.split(",")[1];
-    return `${timeOnly}`;
+    const timeOnly = fullDate.split(",")[1];   
+    console.log(`${dateOnly} at ${timeOnly}`);
+    return `${dateOnly} at ${timeOnly}`;
+    // return `${timeOnly}`;
   } else {
     const todayDate = new Date().toLocaleString("en-US", {
-      year: undefined,
-      month: undefined,
-      day: undefined,
+      year: "numeric",
+      month: "numeric",
+      day:"numeric" ,
       weekday: undefined,
       hour: "2-digit",
       hour12: false,
       minute: "2-digit",
       second: undefined,
     });
+    console.log(todayDate);
     return `${todayDate}`;
   }
 } 

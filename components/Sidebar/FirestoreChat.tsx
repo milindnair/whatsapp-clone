@@ -7,36 +7,47 @@ import { DocumentData, onSnapshot } from 'firebase/firestore'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Chat from './Chat'
+import Search from './Search';
+import Archived from './Archived';
 
-const FirestoreChat:React.FC = () => {
-    const [chats,setChats] = useState<DocumentData>([]);
-    
-    useEffect(() => {
-        onSnapshot(chatsCollection, (snapshot) => {
-            const snapshotRef= snapshot.docs.map((doc) => getSnapshotDoc(doc));
-            const messageList = snapshotRef;
-            setChats(messageList);
-        })
-        },[]);
-  
-    return (
+const FirestoreChat: React.FC = () => {
+  const [chats, setChats] = useState<DocumentData>([]);
+  const [searchName, setSearchName] = useState("");
+
+  const handleSearchNameChange = (name: string) => {
+    setSearchName(name);
+  };
+
+  useEffect(() => {
+    onSnapshot(chatsCollection, (snapshot) => {
+      const snapshotRef = snapshot.docs.map((doc) => getSnapshotDoc(doc));
+      const messageList = snapshotRef;
+      setChats(messageList);
+    });
+  }, []);
+
+  return (
     <div>
-        {!!chats &&
-        chats
-          ?.filter((chat: DocumentData) =>
-            chat?.messages.message?.some(
-              (item: ChatMessageType) =>
-                item?.messageSenderId === auth?.currentUser?.uid ||
-                item?.messageRecipientId === auth?.currentUser?.uid
-            )
-          )
-          .map((chat: DocumentData, index: number) => (
-            <Link href={`/chat/${chat?.link}`} key={index}>
-              <Chat chatData={chat} />
-            </Link>
-          ))}
+      <Search onChange={handleSearchNameChange} />
+      <Archived />
+      {chats
+        .filter((chat: DocumentData) => {
+          // Check if the chatData contains the searchName in any part of the chat
+          if (!searchName) return true; // If searchName is empty, show all chats
+  
+          const lowerCaseSearchName = searchName.toLowerCase();
+          const chatDataStr = JSON.stringify(chat).toLowerCase();
+  
+          return chatDataStr.includes(lowerCaseSearchName);
+        })
+        .map((chat: DocumentData, index: number) => (
+          <Link href={`/chat/${chat?.link}`} key={index}>
+            <Chat chatData={chat} />
+          </Link>
+        ))}
     </div>
-  )
-}
+  );
+  
+};
 
 export default FirestoreChat;

@@ -1,20 +1,15 @@
-
-
-.back{
-    display: none;
-}
-
 @media screen and (max-width: 768px) {
-    .image{
-        display: none;
+    .image {
+      display: none; /* Hide the Image component in mobile view */
     }
-    
-    .chat{
-        width: 100%;
-        height: auto;
+  
+    .chat {
+      width: 100%;
+      height: auto;
     }
-
-    .back{
-        display: block;
+  
+    .back {
+      display: block; /* Assuming you have a back button with the back class to show in mobile view */
     }
-}
+  }
+  

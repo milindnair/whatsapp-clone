@@ -21,10 +21,13 @@ export default async function Home() {
 
   return (
     <main className="flex h-screen overflow-hidden">
-      <div className="bg-white w-1/3 overflow-y-auto text-black chat">
+      {/* ChatSidebar will always be shown */}
+      <div className="bg-white w-full md:w-1/3 overflow-y-auto text-black chat">
         <ChatSidebar data={fetchedUsers}/>
       </div>
-      <div className="w-full overflow-y-auto flex items-center justify-center bg-blue-500 image">
+
+      {/* Image component will be shown only on screens with width greater than 768px */}
+      <div className="hidden md:block w-full overflow-y-auto flex items-center justify-center bg-blue-500 image">
         <Image
           src={Whatsappbg}
           alt="Whatsapp background"

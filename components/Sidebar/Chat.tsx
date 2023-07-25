@@ -31,7 +31,7 @@ const Chat: React.FC<Props> = ({ data , chatData}) => {
   
   return (
     <div className="w-full flex items-center justify-between py-4 px-6 bg-white border-b border-gray-400 hover:bg-gray-200 opacity-80 overflow-hidden cursor-pointer">
-      <div className="flex justify-start items-center gap-4">
+      <div className="flex justify-start items-center gap-4"  >
         <Image
           src={ChatInfo?.photo || data?.image}
           alt="user"

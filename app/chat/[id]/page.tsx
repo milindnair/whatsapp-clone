@@ -5,6 +5,7 @@ import { AllUsers } from "@/types";
 import getUser from "@/lib/firebase/helper";
 import ChatSidebar from "@/modules/ChatSidebar";
 import MainScreen from "@/modules/MainScreen";
+import "@/app/homepage.css";
 
 
 export default async function () {

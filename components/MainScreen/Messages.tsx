@@ -32,6 +32,14 @@ const Messages: React.FC<Props> = ({ data, paramId }) => {
   console.log(data);
   console.log(Images);
 
+  if(data === undefined){
+    return(
+      <>
+      <h2>Write your first text</h2>
+      </>
+    )
+  }
+
   const formatTime = (timestampSeconds: any): string => {
     const date = new Date(timestampSeconds * 1000);
     const hours = date.getHours().toString().padStart(2, "0");
@@ -39,7 +47,7 @@ const Messages: React.FC<Props> = ({ data, paramId }) => {
     return `${hours}:${minutes}`;
   };
 
-  const updatedData: DocumentData[] = data.map((item) => ({
+  const updatedData: DocumentData[] = data?.map((item) => ({
     ...item,
     createdAt: formatDate(item?.createdAt?.seconds).split("at")[1],
     createdDate: formatDate(item?.createdAt?.seconds).split("at")[0],
@@ -52,10 +60,11 @@ const Messages: React.FC<Props> = ({ data, paramId }) => {
   }));
 
  // Sort updatedData in ascending order based on createdAt
-updatedData.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  updatedData.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
 
 // Sort updatedImages in ascending order based on createdAt
 updatedImages.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+
 
 // Merge updatedData and updatedImages into combinedData while maintaining the sorted order
 const combinedData: (DocumentData | ImageDocument)[] = [
